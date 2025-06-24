@@ -1,0 +1,39 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textResumo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Resumo da requisição:"
+            android:textSize="18sp" />
+
+
+        <!-- Blocos de cotações -->
+        <LinearLayout android:id="@+id/blocoCotacoes"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btnParidadeDolar"
+            android:text="Ver paridade com dólar"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btnSalvarCotacao"
+            android:text="Salvar cotação"
+            android:layout_marginTop="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</ScrollView>

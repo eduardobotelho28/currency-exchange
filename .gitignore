@@ -1,0 +1,19 @@
+# Diretórios a ignorar
+.gradle/
+.idea/
+build/
+app/build/
+captures/
+.externalNativeBuild/
+
+# Arquivos específicos
+*.iml
+*.log
+*.keystore
+*.tmp
+*.swp
+*.bak
+.DS_Store
+
+# Arquivos locais
+local.properties
