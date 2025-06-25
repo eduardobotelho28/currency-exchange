@@ -1,7 +1,10 @@
 package com.example.currencyexchange;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -22,6 +25,13 @@ public class MainActivity extends AppCompatActivity {
         listViewMoedas = findViewById(R.id.listViewMoedas);
 
         carregarMoedas();
+
+        Button btnVerCotacoesSalvas = findViewById(R.id.btnVerCotacoesSalvas);
+        btnVerCotacoesSalvas.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, CotacoesSalvasActivity.class);
+            startActivity(intent);
+        });
+
     }
 
     private void carregarMoedas() {

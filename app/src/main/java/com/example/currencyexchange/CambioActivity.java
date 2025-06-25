@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -22,6 +23,7 @@ public class CambioActivity extends AppCompatActivity {
     private TextView textResumo;
     private LinearLayout blocoCotacoes;
     private Button btnParidadeDolar, btnSalvarCotacao;
+    private List<Cotacao> cotacoesAtuais; // nova variável global
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +51,29 @@ public class CambioActivity extends AppCompatActivity {
 
 
         btnSalvarCotacao.setOnClickListener(v -> {
-            // Ações futuras — salvaremos no Room
+            if (cotacoesAtuais != null && !cotacoesAtuais.isEmpty()) {
+                List<CotacaoEntity> listaSalvar = new ArrayList<>();
+                for (Cotacao cot : cotacoesAtuais) {
+                    listaSalvar.add(new CotacaoEntity(
+                            moeda,
+                            data,
+                            cot.getTipo_boletim(),
+                            cot.getCotacao_compra(),
+                            cot.getCotacao_venda()
+                    ));
+                }
+
+                new Thread(() -> {
+                    AppDatabase db = AppDatabase.getInstance(getApplicationContext());
+                    db.cotacaoDao().inserirTodas(listaSalvar);
+
+                    runOnUiThread(() -> Toast.makeText(this, "Cotação salva com sucesso!", Toast.LENGTH_SHORT).show());
+                }).start();
+            } else {
+                Toast.makeText(this, "Nenhuma cotação para salvar.", Toast.LENGTH_SHORT).show();
+            }
         });
+
     }
 
     private void carregarCotacao(String moeda, String data) {
@@ -61,7 +84,8 @@ public class CambioActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<CotacaoResponse> call, Response<CotacaoResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    exibirBlocos(response.body().getCotacoes());
+                    cotacoesAtuais = response.body().getCotacoes();
+                    exibirBlocos(cotacoesAtuais);
                 }
                 else {
                     Log.e("API_ERROR", "Código: " + response.code());

@@ -27,7 +27,8 @@
         <activity android:name=".SelecionarDataActivity" />
         <activity android:name=".CambioActivity" />
         <activity android:name=".ParidadeDolarActivity" />
-
+        <activity android:name=".CotacoesSalvasActivity" />
+        <activity android:name=".DetalheCotacaoSalvaActivity" />
 
     </application>
 
