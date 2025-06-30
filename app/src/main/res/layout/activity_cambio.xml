@@ -14,8 +14,6 @@
             android:text="Resumo da requisição:"
             android:textSize="18sp" />
 
-
-        <!-- Blocos de cotações -->
         <LinearLayout android:id="@+id/blocoCotacoes"
             android:orientation="vertical"
             android:layout_marginTop="16dp"
